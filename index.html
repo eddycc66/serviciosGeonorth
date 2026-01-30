@@ -1,0 +1,1483 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GEONORTH | Servicios de Exploración Minera</title>
+    <meta name="description" content="Teledetección, SIG e Inteligencia Artificial para la exploración minera avanzada. GEONORTH reduce el riesgo exploratorio.">
+
+    <!-- Fuentes Google Fonts: 'Rajdhani' (Tech/Científico) y 'Inter' (Corporativo) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Iconos FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* =========================================
+           VARIABLES Y RESET
+           ========================================= */
+        :root {
+            --bg-dark: #0a0e17;
+            --bg-card: #111827;
+            --bg-card-hover: #1f2937;
+            --primary-blue: #3b82f6; /* Azul brillante */
+            --primary-gold: #fbbf24; /* Dorado minero */
+            --accent-green: #10b981; /* Éxito/Datos */
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --gradient-dark: linear-gradient(135deg, #0a0e17 0%, #111827 100%);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5 {
+            font-family: 'Rajdhani', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+            object-fit: cover;
+        }
+
+        /* Utilidades */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-padding {
+            padding: 100px 0;
+        }
+
+        .text-center { text-align: center; }
+        .text-gold { color: var(--primary-gold); }
+        .text-blue { color: var(--primary-blue); }
+        .mb-4 { margin-bottom: 1.5rem; }
+
+        /* Botones */
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            border: 2px solid var(--primary-gold);
+            color: var(--primary-gold);
+            background: transparent;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 0%; height: 100%;
+            background: var(--primary-gold);
+            z-index: -1;
+            transition: var(--transition);
+        }
+
+        .btn:hover::before {
+            width: 100%;
+        }
+
+        .btn:hover {
+            color: var(--bg-dark);
+            box-shadow: 0 0 20px rgba(251, 191, 36, 0.4);
+        }
+
+        /* =========================================
+           HEADER & NAV
+           ========================================= */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(10, 14, 23, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 90px; 
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-img {
+            height: 60px; 
+            width: auto;
+            object-fit: contain;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--primary-gold);
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-main);
+        }
+
+        /* =========================================
+           HERO SECTION
+           ========================================= */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1920&auto=format&fit=crop') no-repeat center center/cover;
+            filter: grayscale(80%) brightness(0.4) contrast(1.2);
+            z-index: 1;
+        }
+
+        #hero-canvas {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 2;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+            max-width: 800px;
+            padding: 20px;
+            opacity: 0; 
+            transform: translateY(30px);
+            animation: fadeUp 1s ease forwards 0.5s;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 0 4px 10px rgba(0,0,0,0.5);
+        }
+
+        .hero h1 span {
+            color: var(--primary-blue);
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-main);
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+
+        @keyframes fadeUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* =========================================
+           SECCIÓN ENFOQUE TECNOLÓGICO
+           ========================================= */
+        .tech-focus {
+            background: var(--bg-card);
+            position: relative;
+            border-top: 1px solid rgba(59, 130, 246, 0.2);
+            border-bottom: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .tech-item {
+            text-align: center;
+            padding: 30px;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .tech-item:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-blue);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .tech-icon {
+            font-size: 3rem;
+            color: var(--primary-blue);
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .tech-item h3 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+
+        .tech-item p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        /* =========================================
+           SERVICIOS PRINCIPALES
+           ========================================= */
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--text-main);
+            margin-bottom: 15px;
+        }
+
+        .section-header .line {
+            width: 80px;
+            height: 4px;
+            background: var(--primary-gold);
+            margin: 0 auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: var(--transition);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .service-card:hover {
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            border-color: rgba(251, 191, 36, 0.3);
+        }
+
+        .card-img-wrapper {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .card-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            transition: transform 0.5s ease;
+        }
+
+        .service-card:hover .card-img-wrapper img {
+            transform: scale(1.1);
+        }
+
+        .card-content {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-icon {
+            font-size: 2rem;
+            color: var(--primary-gold);
+            margin-bottom: 15px;
+        }
+
+        .card-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .card-content p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        /* Estilos para el acordeón */
+        .card-link {
+            color: var(--primary-blue);
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            background: none;
+            border: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0;
+            outline: none;
+            transition: color 0.3s;
+        }
+
+        .card-link i {
+            transition: transform 0.3s ease;
+        }
+
+        .card-link.active i {
+            transform: rotate(180deg);
+            color: var(--primary-gold);
+        }
+
+        .details-panel {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
+            background: rgba(0,0,0,0.2);
+            border-radius: 0 0 8px 8px;
+            margin: 0 -25px -25px -25px; /* Extender al borde de la tarjeta */
+            padding: 0 25px; /* Padding horizontal */
+        }
+        
+        .details-content {
+            padding: 20px 0;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.85rem;
+            color: #d1d5db;
+        }
+
+        .details-content ul {
+            list-style: disc;
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+        .details-content li {
+            margin-bottom: 5px;
+        }
+
+        /* =========================================
+           CASOS DE ESTUDIO ACTUALIZADOS
+           ========================================= */
+        .case-study {
+            background: linear-gradient(to bottom, var(--bg-dark), #0d121d);
+            position: relative;
+        }
+
+        .intro-text {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 60px auto;
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        .case-container {
+            display: flex;
+            flex-direction: column;
+            gap: 60px;
+        }
+
+        .case-block {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+            background: var(--bg-card);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: var(--transition);
+        }
+
+        .case-block:hover {
+            border-color: rgba(59, 130, 246, 0.3);
+            transform: translateY(-5px);
+        }
+
+        .case-visual {
+            height: 100%;
+            min-height: 350px;
+            position: relative;
+        }
+
+        .case-visual img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .case-block:hover .case-visual img {
+            transform: scale(1.05);
+        }
+
+        .case-overlay-num {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 4rem;
+            font-weight: 700;
+            font-family: 'Rajdhani', sans-serif;
+            color: rgba(255,255,255,0.05);
+            line-height: 1;
+            pointer-events: none;
+        }
+
+        .case-info {
+            padding: 40px;
+        }
+
+        .case-tag {
+            display: inline-block;
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--primary-blue);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .case-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+            color: var(--text-main);
+        }
+
+        .case-location {
+            color: var(--primary-gold);
+            font-weight: 600;
+            margin-bottom: 25px;
+            display: block;
+            font-size: 0.95rem;
+        }
+
+        .case-grid-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 25px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 25px;
+        }
+
+        .detail-col h5 {
+            color: var(--text-main);
+            margin-bottom: 8px;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .detail-col h5 i {
+            color: var(--primary-gold);
+            font-size: 0.8rem;
+        }
+
+        .detail-col p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        /* Alternar orden visual para los casos impares */
+        .case-block.reverse .case-visual {
+            order: 2;
+        }
+        .case-block.reverse .case-info {
+            order: 1;
+        }
+
+        /* =========================================
+           ENTREGABLES
+           ========================================= */
+        .deliverables {
+            background: linear-gradient(to right, #0f172a, #1e293b);
+        }
+
+        .deliverables-container {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .deliverables-list {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .check-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 25px;
+        }
+
+        .check-icon {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--accent-green);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        .check-item h4 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .check-item p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .deliverables-visual {
+            flex: 1;
+            min-width: 300px;
+            position: relative;
+        }
+
+        .mockup {
+            position: relative;
+            background: var(--bg-dark);
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            transform: perspective(1000px) rotateY(-10deg) rotateX(5deg);
+            transition: var(--transition);
+        }
+
+        .mockup:hover {
+            transform: perspective(1000px) rotateY(0) rotateX(0);
+        }
+
+        .mockup-img {
+            width: 100%;
+            height: auto;
+            border-radius: 4px;
+            opacity: 0.8;
+        }
+
+        /* =========================================
+           RESULTADOS COMPROBADOS
+           ========================================= */
+        .results-section {
+            background: url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=1920&auto=format&fit=crop') no-repeat center center/cover;
+            position: relative;
+            text-align: center;
+        }
+
+        .results-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(10, 14, 23, 0.9);
+        }
+
+        .results-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .big-stat {
+            font-size: 5rem;
+            font-weight: 700;
+            font-family: 'Rajdhani', sans-serif;
+            color: var(--accent-green);
+            line-height: 1;
+            margin: 20px 0;
+            text-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
+        }
+
+        .stat-desc {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* =========================================
+           FOOTER
+           ========================================= */
+        footer {
+            background: #05080c;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding: 80px 0 40px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .footer-brand p {
+            color: var(--text-muted);
+            margin-top: 20px;
+            font-size: 0.9rem;
+        }
+
+        .footer-contact h4 {
+            margin-bottom: 20px;
+            color: var(--text-main);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+            color: var(--text-muted);
+            transition: var(--transition);
+        }
+
+        .contact-item:hover {
+            color: var(--primary-gold);
+        }
+
+        .contact-item i {
+            color: var(--primary-blue);
+        }
+
+        .ceo-card {
+            background: rgba(255,255,255,0.03);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.05);
+            margin-top: 20px;
+        }
+
+        .ceo-card h5 {
+            color: var(--text-main);
+            margin-bottom: 5px;
+        }
+
+        .ceo-card span {
+            font-size: 0.85rem;
+            color: var(--primary-gold);
+            text-transform: uppercase;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            color: #6b7280;
+            font-size: 0.85rem;
+        }
+
+        /* =========================================
+           MODAL (Custom)
+           ========================================= */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 2000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .modal-content {
+            background: var(--bg-card);
+            padding: 40px;
+            border-radius: 12px;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            border: 1px solid var(--primary-blue);
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            color: var(--text-muted);
+            font-size: 1.5rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 6px;
+            color: var(--text-main);
+            font-family: inherit;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+        }
+
+        /* =========================================
+           ANIMACIONES SCROLL
+           ========================================= */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* =========================================
+           RESPONSIVE
+           ========================================= */
+        @media (max-width: 992px) {
+            .case-block, .case-block.reverse {
+                grid-template-columns: 1fr;
+            }
+            .case-visual {
+                height: 250px;
+                min-height: auto;
+                order: 1 !important;
+            }
+            .case-info {
+                order: 2 !important;
+                padding: 30px 20px;
+            }
+            .case-grid-details {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .navbar { height: auto; padding: 15px 0; }
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 90px;
+                left: 0;
+                width: 100%;
+                background: var(--bg-card);
+                padding: 20px;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+            }
+            .nav-links.active { display: flex; }
+            .menu-toggle { display: block; }
+            .big-stat { font-size: 3.5rem; }
+            .section-header h2 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAV -->
+    <header>
+        <div class="container navbar">
+            <a href="#" class="logo">
+                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiQXCA3ZDW0bQrgKNtU8bR5FYE2CcJkFDUdKvl3cLnUq7tNJ5zSTbXXENCkF8RsjxEmJySQV_AeH0m9EjDVKvETFZnoDsvaNoBCzkubUzPkxguJ9tnp6TBIyHT8i6eDcFoINClVA7H5jk9IolilukfYqGt8gPZGEKN2UDHC2dfKvkeNspJCkkX3jeXBID7h/s1022/ChatGPT%20Image%2024%20ene%202026,%2009_40_57%20a.m..png" alt="GEONORTH Logo" class="logo-img">
+            </a>
+            <div class="menu-toggle" id="mobile-menu">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+            <nav class="nav-links">
+                <a href="#services">Servicios</a>
+                <a href="#focus">Tecnología</a>
+                <a href="#case-study">Casos de Estudio</a>
+                <a href="#results">Resultados</a>
+                <a href="#" class="cta-nav" onclick="openModal()">Contacto</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero" id="home">
+        <div class="hero-bg"></div>
+        <canvas id="hero-canvas"></canvas>
+        <div class="hero-content">
+            <h1>Servicios – Exploración Minera | <span>GEONORTH</span></h1>
+            <p>Teledetección, SIG e Inteligencia Artificial para reducir el riesgo exploratorio y optimizar decisiones estratégicas.</p>
+            <button class="btn" onclick="openModal()">Solicitar Información</button>
+        </div>
+    </section>
+
+    <!-- ENFOQUE TECNOLÓGICO -->
+    <section class="section-padding tech-focus" id="focus">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2>Enfoque Tecnológico</h2>
+                <div class="line"></div>
+                <p class="mt-4" style="color:var(--text-muted); max-width: 700px; margin: 20px auto 0;">
+                    Nuestro enfoque combina tecnología satelital de vanguardia, Sistemas de Información Geográfica (SIG) e Inteligencia Artificial, con el objetivo de reducir la incertidumbre y optimizar la toma de decisiones en la exploración de depósitos minerales.
+                </p>
+            </div>
+
+            <div class="tech-grid">
+                <div class="tech-item reveal">
+                    <i class="fa-solid fa-satellite tech-icon"></i>
+                    <h3>Satélites</h3>
+                    <p>Sensores remotos de alta resolución y datos espectrales.</p>
+                </div>
+                <div class="tech-item reveal">
+                    <i class="fa-solid fa-map-location-dot tech-icon"></i>
+                    <h3>Mapas Geológicos</h3>
+                    <p>Procesamiento digital de imágenes y geología estructural.</p>
+                </div>
+                <div class="tech-item reveal">
+                    <i class="fa-solid fa-brain tech-icon"></i>
+                    <h3>IA & Machine Learning</h3>
+                    <p>Algoritmos predictivos para detección de anomalías.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICIOS PRINCIPALES -->
+    <section class="section-padding" id="services">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2>Servicios Principales</h2>
+                <div class="line"></div>
+            </div>
+
+            <div class="services-grid">
+                <!-- Servicio 1 -->
+                <article class="service-card reveal">
+                    <div class="card-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1000&auto=format&fit=crop" alt="Teledetección Multiespectral">
+                    </div>
+                    <div class="card-content">
+                        <div class="card-icon"><i class="fa-solid fa-satellite-dish"></i></div>
+                        <h3>Teledetección Multiespectral</h3>
+                        <p>Análisis avanzado con sensores Sentinel-2, Landsat y ASTER para la identificación de firmas espectrales.</p>
+                        <button class="card-link" onclick="toggleDetails(this)">Leer más <i class="fa-solid fa-chevron-down"></i></button>
+                        <div class="details-panel">
+                            <div class="details-content">
+                                <p>Nuestro proceso incluye correcciones atmosféricas y radiométricas precisas para garantizar la calidad de los datos de reflectancia superficial.</p>
+                                <ul>
+                                    <li>Identificación de litologías arcillosas y carbonatadas.</li>
+                                    <li>Mapeo de vegetación estrésada como indicador indirecto.</li>
+                                    <li>Análisis de bandas SWIR para discriminación mineralógica.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Servicio 2 -->
+                <article class="service-card reveal">
+                    <div class="card-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=1000&auto=format&fit=crop" alt="Mapeo de Alteraciones">
+                    </div>
+                    <div class="card-content">
+                        <div class="card-icon"><i class="fa-solid fa-vial"></i></div>
+                        <h3>Mapeo de Alteraciones Hidrotermales</h3>
+                        <p>Aplicación de índices espectrales para la detección de óxidos de hierro, arcillas y zonas de alteración.</p>
+                        <button class="card-link" onclick="toggleDetails(this)">Leer más <i class="fa-solid fa-chevron-down"></i></button>
+                        <div class="details-panel">
+                            <div class="details-content">
+                                <p>Utilizamos el método de cruce de bandas (Band Ratio) y el Análisis de Componentes Principales (PCA) para resaltar anomalías.</p>
+                                <ul>
+                                    <li>Detección de óxidos de hierro (limonita, hematita).</li>
+                                    <li>Zonas de alteración fílica y argílica.</li>
+                                    <li>Mapeo de sílice en sistemas epitermales.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Servicio 3 -->
+                <article class="service-card reveal">
+                    <div class="card-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?q=80&w=1000&auto=format&fit=crop" alt="Geología Estructural IA">
+                    </div>
+                    <div class="card-content">
+                        <div class="card-icon"><i class="fa-solid fa-brain"></i></div>
+                        <h3>Geología Estructural asistida por IA</h3>
+                        <p>Identificación automática de lineamientos, fallas y fracturas mediante algoritmos de detección de bordes.</p>
+                        <button class="card-link" onclick="toggleDetails(this)">Leer más <i class="fa-solid fa-chevron-down"></i></button>
+                        <div class="details-panel">
+                            <div class="details-content">
+                                <p>Entrenamos redes neuronales convolucionales (CNN) para reconocer patrones de fallas y sistemas de vetas imperceptibles.</p>
+                                <ul>
+                                    <li>Análisis direccional automático.</li>
+                                    <li>Densidad de fracturas por metro cuadrado.</li>
+                                    <li>Intersecciones estructurales de alto potencial.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- CASOS DE ESTUDIO ACTUALIZADOS -->
+    <section class="section-padding case-study" id="case-study">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2>Casos de Estudio: Exploración Minera Integral y GeoAI</h2>
+                <div class="line"></div>
+                <p class="intro-text">
+                    En GeoNorth, aplicamos un flujo de trabajo híbrido que combina la potencia del análisis geoespacial remoto con la precisión del trabajo geológico de campo. Estos proyectos demuestran nuestra capacidad para optimizar la prospección minera en la región andina.
+                </p>
+            </div>
+
+            <div class="case-container">
+                
+                <!-- CASO 1: IRUPANA -->
+                <article class="case-block reveal">
+                    <div class="case-visual">
+                        <div class="case-overlay-num">01</div>
+                        <img src="https://picsum.photos/seed/irupana/800/600" alt="Sector Sur de Irupana">
+                    </div>
+                    <div class="case-info">
+                        <span class="case-tag">Bolivia</span>
+                        <h3>Sector Sur de Irupana</h3>
+                        <span class="case-location"><i class="fa-solid fa-location-dot"></i> La Paz, Bolivia</span>
+                        <p style="color:var(--text-muted); margin-bottom:15px;">Realizamos un estudio integral de exploración minera combinando teledetección avanzada y algoritmos de Inteligencia Artificial para la identificación de depósitos auríferos y aluviales.</p>
+                        
+                        <div class="case-grid-details">
+                            <div class="detail-col">
+                                <h5><i class="fa-solid fa-microchip"></i> Tecnología Aplicada</h5>
+                                <p>Fusión de imágenes satelitales (Sentinel-2, Landsat 8–9) con modelos de elevación digital (DEM).</p>
+                            </div>
+                            <div class="detail-col">
+                                <h5><i class="fa-solid fa-compass-drafting"></i> Metodología</h5>
+                                <p>Aplicación de índices espectrales y Machine Learning para priorizar áreas objetivo, reduciendo significativamente los tiempos de prospección.</p>
+                            </div>
+                            <div class="detail-col">
+                                <h5><i class="fa-solid fa-check-double"></i> Validación</h5>
+                                <p>Ejecución de campañas de reconocimiento geológico y muestreo en campo para validar anomalías detectadas por IA.</p>
+                            </div>
+                            <div class="detail-col">
+                                <h5><i class="fa-solid fa-trophy"></i> Resultado</h5>
+                                <p>Generación de mapas de prospectividad minera de alta precisión y una base técnica sólida para la toma de decisiones.</p>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- CASO 2: SANDIA -->
+                <article class="case-block reverse reveal">
+                    <div class="case-visual">
+                        <div class="case-overlay-num">02</div>
+                        <img src="https://picsum.photos/seed/sandia/800/600" alt="Sandia, Puno">
+                    </div>
+                    <div class="case-info">
+                        <span class="case-tag">Perú</span>
+                        <h3>Sandia, Puno</h3>
+                        <span class="case-location"><i class="fa-solid fa-location-dot"></i> Puno, Perú</span>
+                        <p style="color:var(--text-muted); margin-bottom:15px;">Lideramos la evaluación técnica en una de las zonas con mayor potencial minero del sur peruano, enfocándonos en la cuantificación de material y análisis de alteraciones.</p>
+                        
+                        <div class="case-grid-details">
+                            <div class="detail-col">
+                                <h5><i class="fa-solid fa-cubes-stacked"></i> Cuantificación de Recursos</h5>
+                                <p>Implementación de mallas de muestreo estratégico para calcular y cuantificar el volumen de material potencial en áreas críticas.</p>
+                            </div>
+                            <div class="detail-col">
+                                <h5><i class="fa-solid fa-flask"></i> Geoquímica y Petrografía</h5>
+                                <p>Análisis petrográficos de alteraciones hidrotermales identificadas mediante sensores remotos, validando el potencial genético.</p>
+                            </div>
+                            <div class="detail-col">
+                                <h5><i class="fa-solid fa-crosshairs"></i> Precisión en Campo</h5>
+                                <p>Validación técnica de hectáreas con potencial "Muy Alto" y "Alto" mediante muestreo geoquímico sistemático.</p>
+                            </div>
+                            <div class="detail-col">
+                                <h5><i class="fa-solid fa-eye"></i> Monitoreo y Control</h5>
+                                <p>Seguimiento temporal con imágenes de alta resolución para detectar actividad minera y realizar monitoreo ambiental preventivo.</p>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- CASO 3: ORURO -->
+                <article class="case-block reveal">
+                    <div class="case-visual">
+                        <div class="case-overlay-num">03</div>
+                        <img src="https://picsum.photos/seed/oruro/800/600" alt="Centro Minero de Oruro">
+                    </div>
+                    <div class="case-info">
+                        <span class="case-tag">Bolivia</span>
+                        <h3>Centro Minero de Oruro</h3>
+                        <span class="case-location"><i class="fa-solid fa-location-dot"></i> Oruro, Bolivia</span>
+                        <p style="color:var(--text-muted); margin-bottom:15px;">En el corazón minero de Bolivia, aplicamos nuestra metodología para la revalorización y optimización de áreas con actividad minera preexistente.</p>
+                        
+                        <div class="case-grid-details">
+                            <div class="detail-col">
+                                <h5><i class="fa-solid fa-magnifying-glass-chart"></i> Diagnóstico Estructural</h5>
+                                <p>Evaluación detallada del terreno y análisis de estructuras mineralizadas mediante cartografía geomorfológica asistida por drones.</p>
+                            </div>
+                            <div class="detail-col">
+                                <h5><i class="fa-solid fa-handshake"></i> Soporte a Cooperativas</h5>
+                                <p>Asesoramiento técnico para mejorar la eficiencia en la extracción y reducir el impacto ambiental mediante modelos predictivos.</p>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ENTREGABLES -->
+    <section class="section-padding deliverables">
+        <div class="container">
+            <div class="deliverables-container">
+                <div class="deliverables-list reveal">
+                    <h2 class="mb-4">Entregables y Resultados</h2>
+                    <div class="check-item">
+                        <div class="check-icon"><i class="fa-solid fa-check"></i></div>
+                        <div>
+                            <h4>Mapas de Áreas Prioritarias</h4>
+                            <p>Delimitación precisa de zonas de alto potencial mineral.</p>
+                        </div>
+                    </div>
+                    <div class="check-item">
+                        <div class="check-icon"><i class="fa-solid fa-file-pdf"></i></div>
+                        <div>
+                            <h4>Informe Técnico Detallado</h4>
+                            <p>Documentación completa de metodología y hallazgos.</p>
+                        </div>
+                    </div>
+                    <div class="check-item">
+                        <div class="check-icon"><i class="fa-solid fa-chess"></i></div>
+                        <div>
+                            <h4>Soporte Estratégico</h4>
+                            <p>Asesoría para la siguiente fase de exploración en terreno.</p>
+                        </div>
+                    </div>
+                    <button class="btn" style="margin-top: 20px;" onclick="openModal()">Solicitar Ejemplo</button>
+                </div>
+                <div class="deliverables-visual reveal">
+                    <div class="mockup">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1000&auto=format&fit=crop" alt="Mockup Informe Técnico" class="mockup-img">
+                        <div style="margin-top:15px; display:flex; justify-content:space-between; color:#6b7280; font-size:0.8rem;">
+                            <span>GEONORTH_REPORT_V2.pdf</span>
+                            <span>CONFIDENTIAL</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- RESULTADOS COMPROBADOS -->
+    <section class="section-padding results-section" id="results">
+        <div class="results-overlay"></div>
+        <div class="container results-content reveal">
+            <h3 style="text-transform:uppercase; letter-spacing:0.1em;">Resultados Comprobados</h3>
+            <div class="big-stat">60 %</div>
+            <p class="stat-desc">Reducción del área de exploración inicial<br>mediante filtrado inteligente de objetivos.</p>
+            <div style="margin-top: 40px;">
+                <button class="btn" style="background:var(--primary-blue); border:none; color:white;" onclick="openModal()">Quiero optimizar mi exploración</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#" class="logo">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiQXCA3ZDW0bQrgKNtU8bR5FYE2CcJkFDUdKvl3cLnUq7tNJ5zSTbXXENCkF8RsjxEmJySQV_AeH0m9EjDVKvETFZnoDsvaNoBCzkubUzPkxguJ9tnp6TBIyHT8i6eDcFoINClVA7H5jk9IolilukfYqGt8gPZGEKN2UDHC2dfKvkeNspJCkkX3jeXBID7h/s1022/ChatGPT%20Image%2024%20ene%202026,%2009_40_57%20a.m..png" alt="GEONORTH Logo" class="logo-img">
+                    </a>
+                    <p>Líderes en exploración minera digital, combinando ciencia geológica con el poder de los datos espaciales y la inteligencia artificial.</p>
+                </div>
+
+                <div class="footer-contact">
+                    <h4>Contacto Directo</h4>
+                    <div class="ceo-card">
+                        <h5>M.Sc. Edwin Calle Condori</h5>
+                        <span>CEO & Founder – GEONORTH</span>
+                        <div style="margin-top:15px;" class="contact-item">
+                            <i class="fa-brands fa-whatsapp"></i>
+                            <a href="https://wa.me/59167345804">+591 67345804</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="footer-contact">
+                    <h4>Enlaces Rápidos</h4>
+                    <ul style="line-height:2;">
+                        <li><a href="#services" style="color:var(--text-muted);"><i class="fa-solid fa-angle-right text-gold"></i> Servicios</a></li>
+                        <li><a href="#case-study" style="color:var(--text-muted);"><i class="fa-solid fa-angle-right text-gold"></i> Casos de Estudio</a></li>
+                        <li><a href="#results" style="color:var(--text-muted);"><i class="fa-solid fa-angle-right text-gold"></i> Resultados</a></li>
+                        <li><a href="#" onclick="openModal()" style="color:var(--text-muted);"><i class="fa-solid fa-angle-right text-gold"></i> Solicitar Cotización</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2023 GEONORTH. Todos los derechos reservados. Especialistas en Geociencias.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODAL DE CONTACTO -->
+    <div class="modal-overlay" id="contactModal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal()">&times;</button>
+            <h3 class="text-gold mb-4">Solicitar Información</h3>
+            <p class="mb-4" style="font-size:0.9rem; color:var(--text-muted);">Complete el formulario y nuestro equipo técnico se pondrá en contacto con usted.</p>
+            
+            <!-- FORMULARIO CONFIGURADO CON TU LINK DE FORMSPREE -->
+            <form id="contactForm" action="https://formspree.io/f/xpqprpqy" method="POST" onsubmit="handleForm(event)">
+                <div class="form-group">
+                    <label>Nombre Completo</label>
+                    <input type="text" name="name" class="form-control" placeholder="Ej: Juan Pérez" required>
+                </div>
+                <div class="form-group">
+                    <label>Empresa / Proyecto</label>
+                    <input type="text" name="company" class="form-control" placeholder="Ej: Minera Sur S.A." required>
+                </div>
+                <div class="form-group">
+                    <label>Mensaje</label>
+                    <textarea name="message" class="form-control" rows="3" placeholder="Detalles de su requerimiento..." required></textarea>
+                </div>
+                <button type="submit" class="btn" style="width:100%;">Enviar Solicitud</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // 1. Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu');
+        const navLinks = document.querySelector('.nav-links');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            const icon = mobileMenuBtn.querySelector('i');
+            if(navLinks.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-xmark');
+            } else {
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            }
+        });
+
+        // Cerrar menú al hacer click en un enlace
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                mobileMenuBtn.querySelector('i').classList.remove('fa-xmark');
+                mobileMenuBtn.querySelector('i').classList.add('fa-bars');
+            });
+        });
+
+        // 2. Scroll Reveal Animation (Intersection Observer)
+        const revealElements = document.querySelectorAll('.reveal');
+
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            root: null,
+            threshold: 0.15
+        });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // 3. Modal Logic
+        const modal = document.getElementById('contactModal');
+
+        function openModal() {
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden'; 
+        }
+
+        function closeModal() {
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto'; 
+        }
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+        });
+
+        // 4. Toggle Details (Accordion) for Services
+        function toggleDetails(btn) {
+            const cardContent = btn.parentElement;
+            const panel = cardContent.querySelector('.details-panel');
+            const icon = btn.querySelector('i');
+            const textSpan = btn.childNodes[0]; // El texto "Leer más"
+
+            // Toggle clase activa en el botón (para rotar icono)
+            btn.classList.toggle('active');
+
+            if (panel.style.maxHeight) {
+                // Cerrar
+                panel.style.maxHeight = null;
+                // Actualizar texto
+                textSpan.textContent = "Leer más ";
+            } else {
+                // Abrir - necesitamos altura exacta para animación
+                panel.style.maxHeight = panel.scrollHeight + "px";
+                // Actualizar texto
+                textSpan.textContent = "Leer menos ";
+            }
+        }
+
+        // 5. REAL FORM SUBMISSION (AJAX)
+        // Esta función envía los datos a tu link de Formspree sin recargar la página
+        async function handleForm(e) {
+            e.preventDefault(); // Evita que la página se recargue
+            
+            const form = e.target;
+            const btn = form.querySelector('button[type="submit"]');
+            const originalText = btn.innerText;
+            
+            // Estado de "Enviando..."
+            btn.innerText = "Enviando...";
+            btn.style.opacity = "0.7";
+            btn.disabled = true;
+
+            const data = new FormData(form);
+
+            try {
+                // Enviamos los datos usando Fetch API
+                const response = await fetch(form.action, {
+                    method: form.method,
+                    body: data,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    // Éxito
+                    btn.innerText = "¡Mensaje Enviado!";
+                    btn.style.background = "var(--accent-green)";
+                    btn.style.borderColor = "var(--accent-green)";
+                    btn.style.color = "white";
+                    
+                    // Cerrar modal y limpiar después de 2 segundos
+                    setTimeout(() => {
+                        closeModal();
+                        form.reset();
+                        // Restaurar botón
+                        btn.innerText = originalText;
+                        btn.style.background = "transparent";
+                        btn.style.borderColor = "var(--primary-gold)";
+                        btn.style.color = "var(--primary-gold)";
+                        btn.style.opacity = "1";
+                        btn.disabled = false;
+                    }, 2000);
+                } else {
+                    // Error del servidor
+                    btn.innerText = "Error al enviar";
+                    btn.style.background = "#ef4444";
+                    btn.style.color = "white";
+                    
+                    setTimeout(() => {
+                        btn.innerText = originalText;
+                        btn.style.background = "transparent";
+                        btn.style.color = "var(--primary-gold)";
+                        btn.style.opacity = "1";
+                        btn.disabled = false;
+                    }, 2000);
+                }
+            } catch (error) {
+                // Error de conexión
+                btn.innerText = "Error de conexión";
+                console.error('Error:', error);
+                
+                setTimeout(() => {
+                    btn.innerText = originalText;
+                    btn.style.opacity = "1";
+                    btn.disabled = false;
+                }, 2000);
+            }
+        }
+
+        // 6. Particle Animation for Hero (Canvas)
+        const canvas = document.getElementById('hero-canvas');
+        const ctx = canvas.getContext('2d');
+        let particlesArray;
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            initParticles();
+        });
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.directionX = (Math.random() * 0.4) - 0.2;
+                this.directionY = (Math.random() * 0.4) - 0.2;
+                this.size = Math.random() * 2;
+                this.color = '#3b82f6';
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+            }
+            update() {
+                if (this.x > canvas.width || this.x < 0) this.directionX = -this.directionX;
+                if (this.y > canvas.height || this.y < 0) this.directionY = -this.directionY;
+                this.x += this.directionX;
+                this.y += this.directionY;
+                this.draw();
+            }
+        }
+
+        function connect() {
+            let opacityValue = 1;
+            for (let a = 0; a < particlesArray.length; a++) {
+                for (let b = a; b < particlesArray.length; b++) {
+                    let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x))
+                        + ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
+                    if (distance < (canvas.width/7) * (canvas.height/7)) {
+                        opacityValue = 1 - (distance / 20000);
+                        ctx.strokeStyle = 'rgba(59, 130, 246,' + opacityValue + ')';
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+                        ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        function initParticles() {
+            particlesArray = [];
+            let numberOfParticles = (canvas.height * canvas.width) / 9000;
+            for (let i = 0; i < numberOfParticles; i++) {
+                particlesArray.push(new Particle());
+            }
+        }
+
+        function animateParticles() {
+            requestAnimationFrame(animateParticles);
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+            }
+            connect();
+        }
+
+        initParticles();
+        animateParticles();
+
+    </script>
+</body>
+</html>
