@@ -3,43 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GEONORTH | Servicios de Exploración Minera</title>
-    <meta name="description" content="Teledetección, SIG e Inteligencia Artificial para la exploración minera avanzada. GEONORTH reduce el riesgo exploratorio.">
+    <title>SPATIALMIND | Soluciones Geoespaciales – Grupo GEONORTH</title>
+    <meta name="description" content="SPATIALMIND Soluciones Geoespaciales S.R.L. — Teledetección, SIG e Inteligencia Artificial para la exploración minera avanzada. Grupo GEONORTH.">
 
-    <!-- Fuentes Google Fonts: 'Rajdhani' (Tech/Científico) y 'Inter' (Corporativo) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Iconos FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* =========================================
-           VARIABLES Y RESET
-           ========================================= */
         :root {
             --bg-dark: #0a0e17;
             --bg-card: #111827;
             --bg-card-hover: #1f2937;
-            --primary-blue: #3b82f6; /* Azul brillante */
-            --primary-gold: #fbbf24; /* Dorado minero */
-            --accent-green: #10b981; /* Éxito/Datos */
+            --primary-blue: #3b82f6;
+            --primary-gold: #fbbf24;
+            --accent-green: #10b981;
             --text-main: #f3f4f6;
             --text-muted: #9ca3af;
-            --gradient-dark: linear-gradient(135deg, #0a0e17 0%, #111827 100%);
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
 
         body {
             font-family: 'Inter', sans-serif;
@@ -55,38 +41,16 @@
             letter-spacing: 0.05em;
         }
 
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+        img { max-width: 100%; display: block; object-fit: cover; }
 
-        ul {
-            list-style: none;
-        }
-
-        img {
-            max-width: 100%;
-            display: block;
-            object-fit: cover;
-        }
-
-        /* Utilidades */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .section-padding {
-            padding: 100px 0;
-        }
-
-        .text-center { text-align: center; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .section-padding { padding: 100px 0; }
         .text-gold { color: var(--primary-gold); }
         .text-blue { color: var(--primary-blue); }
         .mb-4 { margin-bottom: 1.5rem; }
 
-        /* Botones */
         .btn {
             display: inline-block;
             padding: 12px 30px;
@@ -113,14 +77,8 @@
             transition: var(--transition);
         }
 
-        .btn:hover::before {
-            width: 100%;
-        }
-
-        .btn:hover {
-            color: var(--bg-dark);
-            box-shadow: 0 0 20px rgba(251, 191, 36, 0.4);
-        }
+        .btn:hover::before { width: 100%; }
+        .btn:hover { color: var(--bg-dark); box-shadow: 0 0 20px rgba(251, 191, 36, 0.4); }
 
         /* =========================================
            HEADER & NAV
@@ -139,7 +97,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            height: 90px; 
+            height: 90px;
         }
 
         .logo {
@@ -148,14 +106,41 @@
         }
 
         .logo-img {
-            height: 60px; 
+            height: 55px;
             width: auto;
             object-fit: contain;
         }
 
+        /* Nuevo: contenedor derecho con logo GEONORTH + nav */
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .geonorth-logo {
+            height: 42px;
+            width: auto;
+            object-fit: contain;
+            opacity: 0.85;
+            transition: var(--transition);
+            filter: brightness(1.1);
+        }
+
+        .geonorth-logo:hover {
+            opacity: 1;
+            filter: brightness(1.3);
+        }
+
+        .nav-divider {
+            width: 1px;
+            height: 30px;
+            background: rgba(255,255,255,0.12);
+        }
+
         .nav-links {
             display: flex;
-            gap: 30px;
+            gap: 28px;
         }
 
         .nav-links a {
@@ -208,28 +193,64 @@
             position: relative;
             z-index: 3;
             text-align: center;
-            max-width: 800px;
+            max-width: 850px;
             padding: 20px;
-            opacity: 0; 
+            opacity: 0;
             transform: translateY(30px);
             animation: fadeUp 1s ease forwards 0.5s;
         }
 
+        .hero-brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 25px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 50px;
+            padding: 8px 22px 8px 12px;
+        }
+
+        .hero-brand img {
+            height: 40px;
+            width: auto;
+        }
+
+        .hero-brand span {
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-muted);
+        }
+
         .hero h1 {
-            font-size: 3.5rem;
+            font-size: 3.2rem;
             margin-bottom: 20px;
             text-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            line-height: 1.1;
         }
 
-        .hero h1 span {
+        .hero h1 .brand-name {
             color: var(--primary-blue);
+            display: block;
+            font-size: 1rem;
+            letter-spacing: 0.2em;
+            margin-bottom: 8px;
+            font-weight: 500;
         }
+
+        .hero h1 span { color: var(--primary-blue); }
 
         .hero p {
-            font-size: 1.25rem;
+            font-size: 1.2rem;
             color: var(--text-main);
             margin-bottom: 40px;
             font-weight: 300;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         @keyframes fadeUp {
@@ -241,7 +262,6 @@
            ========================================= */
         .tech-focus {
             background: var(--bg-card);
-            position: relative;
             border-top: 1px solid rgba(59, 130, 246, 0.2);
             border-bottom: 1px solid rgba(59, 130, 246, 0.2);
         }
@@ -275,36 +295,15 @@
             display: inline-block;
         }
 
-        .tech-item h3 {
-            font-size: 1.4rem;
-            margin-bottom: 10px;
-        }
-
-        .tech-item p {
-            font-size: 0.95rem;
-            color: var(--text-muted);
-        }
+        .tech-item h3 { font-size: 1.4rem; margin-bottom: 10px; }
+        .tech-item p { font-size: 0.95rem; color: var(--text-muted); }
 
         /* =========================================
            SERVICIOS PRINCIPALES
            ========================================= */
-        .section-header {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-
-        .section-header h2 {
-            font-size: 2.5rem;
-            color: var(--text-main);
-            margin-bottom: 15px;
-        }
-
-        .section-header .line {
-            width: 80px;
-            height: 4px;
-            background: var(--primary-gold);
-            margin: 0 auto;
-        }
+        .section-header { text-align: center; margin-bottom: 60px; }
+        .section-header h2 { font-size: 2.5rem; color: var(--text-main); margin-bottom: 15px; }
+        .section-header .line { width: 80px; height: 4px; background: var(--primary-gold); margin: 0 auto; }
 
         .services-grid {
             display: grid;
@@ -328,21 +327,9 @@
             border-color: rgba(251, 191, 36, 0.3);
         }
 
-        .card-img-wrapper {
-            height: 200px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .card-img-wrapper img {
-            width: 100%;
-            height: 100%;
-            transition: transform 0.5s ease;
-        }
-
-        .service-card:hover .card-img-wrapper img {
-            transform: scale(1.1);
-        }
+        .card-img-wrapper { height: 200px; overflow: hidden; position: relative; }
+        .card-img-wrapper img { width: 100%; height: 100%; transition: transform 0.5s ease; }
+        .service-card:hover .card-img-wrapper img { transform: scale(1.1); }
 
         .card-content {
             padding: 25px;
@@ -351,24 +338,10 @@
             flex-direction: column;
         }
 
-        .card-icon {
-            font-size: 2rem;
-            color: var(--primary-gold);
-            margin-bottom: 15px;
-        }
+        .card-icon { font-size: 2rem; color: var(--primary-gold); margin-bottom: 15px; }
+        .card-content h3 { font-size: 1.3rem; margin-bottom: 10px; }
+        .card-content p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 10px; }
 
-        .card-content h3 {
-            font-size: 1.3rem;
-            margin-bottom: 10px;
-        }
-
-        .card-content p {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            margin-bottom: 10px;
-        }
-
-        /* Estilos para el acordeón */
         .card-link {
             color: var(--primary-blue);
             font-weight: 600;
@@ -386,14 +359,8 @@
             transition: color 0.3s;
         }
 
-        .card-link i {
-            transition: transform 0.3s ease;
-        }
-
-        .card-link.active i {
-            transform: rotate(180deg);
-            color: var(--primary-gold);
-        }
+        .card-link i { transition: transform 0.3s ease; }
+        .card-link.active i { transform: rotate(180deg); color: var(--primary-gold); }
 
         .details-panel {
             max-height: 0;
@@ -401,10 +368,10 @@
             transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
             background: rgba(0,0,0,0.2);
             border-radius: 0 0 8px 8px;
-            margin: 0 -25px -25px -25px; /* Extender al borde de la tarjeta */
-            padding: 0 25px; /* Padding horizontal */
+            margin: 0 -25px -25px -25px;
+            padding: 0 25px;
         }
-        
+
         .details-content {
             padding: 20px 0;
             border-top: 1px solid rgba(255,255,255,0.1);
@@ -412,21 +379,14 @@
             color: #d1d5db;
         }
 
-        .details-content ul {
-            list-style: disc;
-            margin-left: 20px;
-            margin-top: 10px;
-        }
-        .details-content li {
-            margin-bottom: 5px;
-        }
+        .details-content ul { list-style: disc; margin-left: 20px; margin-top: 10px; }
+        .details-content li { margin-bottom: 5px; }
 
         /* =========================================
-           CASOS DE ESTUDIO ACTUALIZADOS
+           CASOS DE ESTUDIO
            ========================================= */
         .case-study {
             background: linear-gradient(to bottom, var(--bg-dark), #0d121d);
-            position: relative;
         }
 
         .intro-text {
@@ -437,11 +397,7 @@
             font-size: 1.1rem;
         }
 
-        .case-container {
-            display: flex;
-            flex-direction: column;
-            gap: 60px;
-        }
+        .case-container { display: flex; flex-direction: column; gap: 60px; }
 
         .case-block {
             display: grid;
@@ -456,32 +412,15 @@
             transition: var(--transition);
         }
 
-        .case-block:hover {
-            border-color: rgba(59, 130, 246, 0.3);
-            transform: translateY(-5px);
-        }
+        .case-block:hover { border-color: rgba(59, 130, 246, 0.3); transform: translateY(-5px); }
 
-        .case-visual {
-            height: 100%;
-            min-height: 350px;
-            position: relative;
-        }
-
-        .case-visual img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-        
-        .case-block:hover .case-visual img {
-            transform: scale(1.05);
-        }
+        .case-visual { height: 100%; min-height: 350px; position: relative; overflow: hidden; }
+        .case-visual img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+        .case-block:hover .case-visual img { transform: scale(1.05); }
 
         .case-overlay-num {
             position: absolute;
-            top: 20px;
-            left: 20px;
+            top: 20px; left: 20px;
             font-size: 4rem;
             font-weight: 700;
             font-family: 'Rajdhani', sans-serif;
@@ -490,9 +429,7 @@
             pointer-events: none;
         }
 
-        .case-info {
-            padding: 40px;
-        }
+        .case-info { padding: 40px; }
 
         .case-tag {
             display: inline-block;
@@ -506,11 +443,7 @@
             text-transform: uppercase;
         }
 
-        .case-info h3 {
-            font-size: 1.8rem;
-            margin-bottom: 5px;
-            color: var(--text-main);
-        }
+        .case-info h3 { font-size: 1.8rem; margin-bottom: 5px; color: var(--text-main); }
 
         .case-location {
             color: var(--primary-gold);
@@ -538,31 +471,16 @@
             gap: 8px;
         }
 
-        .detail-col h5 i {
-            color: var(--primary-gold);
-            font-size: 0.8rem;
-        }
+        .detail-col h5 i { color: var(--primary-gold); font-size: 0.8rem; }
+        .detail-col p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; }
 
-        .detail-col p {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            line-height: 1.5;
-        }
-
-        /* Alternar orden visual para los casos impares */
-        .case-block.reverse .case-visual {
-            order: 2;
-        }
-        .case-block.reverse .case-info {
-            order: 1;
-        }
+        .case-block.reverse .case-visual { order: 2; }
+        .case-block.reverse .case-info { order: 1; }
 
         /* =========================================
            ENTREGABLES
            ========================================= */
-        .deliverables {
-            background: linear-gradient(to right, #0f172a, #1e293b);
-        }
+        .deliverables { background: linear-gradient(to right, #0f172a, #1e293b); }
 
         .deliverables-container {
             display: flex;
@@ -571,45 +489,74 @@
             gap: 50px;
         }
 
-        .deliverables-list {
-            flex: 1;
-            min-width: 300px;
-        }
+        .deliverables-list { flex: 1; min-width: 300px; }
 
-        .check-item {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 25px;
-        }
+        .check-item { display: flex; align-items: flex-start; margin-bottom: 25px; }
 
         .check-icon {
             background: rgba(16, 185, 129, 0.1);
             color: var(--accent-green);
-            width: 30px;
-            height: 30px;
+            width: 30px; height: 30px;
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            display: flex; align-items: center; justify-content: center;
             margin-right: 15px;
             flex-shrink: 0;
         }
 
-        .check-item h4 {
-            font-size: 1.1rem;
-            margin-bottom: 5px;
+        .check-item h4 { font-size: 1.1rem; margin-bottom: 5px; }
+        .check-item p { font-size: 0.9rem; color: var(--text-muted); }
+
+        .examples-links { margin-top: 30px; display: flex; flex-direction: column; gap: 15px; }
+
+        .example-link-card {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 18px 22px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 10px;
+            transition: var(--transition);
+            cursor: pointer;
         }
 
-        .check-item p {
-            font-size: 0.9rem;
+        .example-link-card:hover {
+            border-color: var(--primary-blue);
+            background: rgba(59, 130, 246, 0.05);
+            transform: translateX(5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        .example-link-card .ex-icon {
+            width: 48px; height: 48px;
+            border-radius: 10px;
+            background: rgba(59, 130, 246, 0.1);
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+            color: var(--primary-blue);
+            font-size: 1.2rem;
+        }
+
+        .example-link-card .ex-text h5 {
+            font-size: 0.95rem;
+            color: var(--text-main);
+            margin-bottom: 3px;
+            text-transform: none;
+            letter-spacing: 0;
+        }
+
+        .example-link-card .ex-text p { font-size: 0.78rem; color: var(--text-muted); }
+
+        .example-link-card .ex-arrow {
+            margin-left: auto;
             color: var(--text-muted);
+            transition: var(--transition);
+            flex-shrink: 0;
         }
 
-        .deliverables-visual {
-            flex: 1;
-            min-width: 300px;
-            position: relative;
-        }
+        .example-link-card:hover .ex-arrow { color: var(--primary-blue); transform: translateX(4px); }
+
+        .deliverables-visual { flex: 1; min-width: 300px; position: relative; }
 
         .mockup {
             position: relative;
@@ -622,16 +569,8 @@
             transition: var(--transition);
         }
 
-        .mockup:hover {
-            transform: perspective(1000px) rotateY(0) rotateX(0);
-        }
-
-        .mockup-img {
-            width: 100%;
-            height: auto;
-            border-radius: 4px;
-            opacity: 0.8;
-        }
+        .mockup:hover { transform: perspective(1000px) rotateY(0) rotateX(0); }
+        .mockup-img { width: 100%; height: auto; border-radius: 4px; opacity: 0.8; }
 
         /* =========================================
            RESULTADOS COMPROBADOS
@@ -642,16 +581,8 @@
             text-align: center;
         }
 
-        .results-overlay {
-            position: absolute;
-            inset: 0;
-            background: rgba(10, 14, 23, 0.9);
-        }
-
-        .results-content {
-            position: relative;
-            z-index: 2;
-        }
+        .results-overlay { position: absolute; inset: 0; background: rgba(10, 14, 23, 0.9); }
+        .results-content { position: relative; z-index: 2; }
 
         .big-stat {
             font-size: 5rem;
@@ -663,12 +594,7 @@
             text-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
         }
 
-        .stat-desc {
-            font-size: 1.2rem;
-            color: var(--text-muted);
-            max-width: 600px;
-            margin: 0 auto;
-        }
+        .stat-desc { font-size: 1.2rem; color: var(--text-muted); max-width: 600px; margin: 0 auto; }
 
         /* =========================================
            FOOTER
@@ -686,16 +612,22 @@
             margin-bottom: 60px;
         }
 
-        .footer-brand p {
-            color: var(--text-muted);
-            margin-top: 20px;
-            font-size: 0.9rem;
+        .footer-brand p { color: var(--text-muted); margin-top: 20px; font-size: 0.9rem; }
+
+        .footer-brand .group-mention {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 4px 12px;
+            background: rgba(251, 191, 36, 0.08);
+            border: 1px solid rgba(251, 191, 36, 0.2);
+            border-radius: 20px;
+            font-size: 0.75rem;
+            color: var(--primary-gold);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
         }
 
-        .footer-contact h4 {
-            margin-bottom: 20px;
-            color: var(--text-main);
-        }
+        .footer-contact h4 { margin-bottom: 20px; color: var(--text-main); }
 
         .contact-item {
             display: flex;
@@ -706,13 +638,8 @@
             transition: var(--transition);
         }
 
-        .contact-item:hover {
-            color: var(--primary-gold);
-        }
-
-        .contact-item i {
-            color: var(--primary-blue);
-        }
+        .contact-item:hover { color: var(--primary-gold); }
+        .contact-item i { color: var(--primary-blue); }
 
         .ceo-card {
             background: rgba(255,255,255,0.03);
@@ -722,16 +649,8 @@
             margin-top: 20px;
         }
 
-        .ceo-card h5 {
-            color: var(--text-main);
-            margin-bottom: 5px;
-        }
-
-        .ceo-card span {
-            font-size: 0.85rem;
-            color: var(--primary-gold);
-            text-transform: uppercase;
-        }
+        .ceo-card h5 { color: var(--text-main); margin-bottom: 5px; }
+        .ceo-card span { font-size: 0.85rem; color: var(--primary-gold); text-transform: uppercase; }
 
         .footer-bottom {
             text-align: center;
@@ -741,8 +660,11 @@
             font-size: 0.85rem;
         }
 
+        .footer-bottom .brand-line { color: var(--text-muted); }
+        .footer-bottom .brand-line strong { color: var(--text-main); font-weight: 600; }
+
         /* =========================================
-           MODAL (Custom)
+           MODAL
            ========================================= */
         .modal-overlay {
             position: fixed;
@@ -758,10 +680,7 @@
             backdrop-filter: blur(5px);
         }
 
-        .modal-overlay.active {
-            opacity: 1;
-            pointer-events: all;
-        }
+        .modal-overlay.active { opacity: 1; pointer-events: all; }
 
         .modal-content {
             background: var(--bg-card);
@@ -775,14 +694,11 @@
             transition: transform 0.3s ease;
         }
 
-        .modal-overlay.active .modal-content {
-            transform: translateY(0);
-        }
+        .modal-overlay.active .modal-content { transform: translateY(0); }
 
         .close-modal {
             position: absolute;
-            top: 15px;
-            right: 15px;
+            top: 15px; right: 15px;
             color: var(--text-muted);
             font-size: 1.5rem;
             cursor: pointer;
@@ -790,16 +706,8 @@
             border: none;
         }
 
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; color: var(--text-muted); font-size: 0.9rem; }
 
         .form-control {
             width: 100%;
@@ -811,49 +719,33 @@
             font-family: inherit;
         }
 
-        .form-control:focus {
-            outline: none;
-            border-color: var(--primary-blue);
-        }
+        .form-control:focus { outline: none; border-color: var(--primary-blue); }
 
         /* =========================================
            ANIMACIONES SCROLL
            ========================================= */
-        .reveal {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: all 0.8s ease;
-        }
-
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s ease; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
 
         /* =========================================
            RESPONSIVE
            ========================================= */
         @media (max-width: 992px) {
-            .case-block, .case-block.reverse {
-                grid-template-columns: 1fr;
-            }
-            .case-visual {
-                height: 250px;
-                min-height: auto;
-                order: 1 !important;
-            }
-            .case-info {
-                order: 2 !important;
-                padding: 30px 20px;
-            }
-            .case-grid-details {
-                grid-template-columns: 1fr;
-            }
+            .case-block, .case-block.reverse { grid-template-columns: 1fr; }
+            .case-visual { height: 250px; min-height: auto; order: 1 !important; }
+            .case-info { order: 2 !important; padding: 30px 20px; }
+            .case-grid-details { grid-template-columns: 1fr; }
         }
 
         @media (max-width: 768px) {
-            .hero h1 { font-size: 2.5rem; }
+            .hero h1 { font-size: 2.2rem; }
+            .hero h1 .brand-name { font-size: 0.8rem; }
             .navbar { height: auto; padding: 15px 0; }
+            
+            .nav-right { gap: 16px; }
+            .nav-divider { display: none; }
+            .geonorth-logo { height: 34px; }
+
             .nav-links {
                 display: none;
                 flex-direction: column;
@@ -869,6 +761,11 @@
             .menu-toggle { display: block; }
             .big-stat { font-size: 3.5rem; }
             .section-header h2 { font-size: 2rem; }
+            .examples-links { flex-direction: column; }
+        }
+
+        @media (max-width: 480px) {
+            .geonorth-logo { display: none; }
         }
     </style>
 </head>
@@ -877,19 +774,26 @@
     <!-- NAV -->
     <header>
         <div class="container navbar">
+            <!-- Izquierda: Logo SPATIALMIND -->
             <a href="#" class="logo">
-                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiQXCA3ZDW0bQrgKNtU8bR5FYE2CcJkFDUdKvl3cLnUq7tNJ5zSTbXXENCkF8RsjxEmJySQV_AeH0m9EjDVKvETFZnoDsvaNoBCzkubUzPkxguJ9tnp6TBIyHT8i6eDcFoINClVA7H5jk9IolilukfYqGt8gPZGEKN2UDHC2dfKvkeNspJCkkX3jeXBID7h/s1022/ChatGPT%20Image%2024%20ene%202026,%2009_40_57%20a.m..png" alt="GEONORTH Logo" class="logo-img">
+                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjg8y42kKvTytWPgixigZ4yUHnN2kUPW8vsoeAyvnz5UH3FO86vgH5Qx2Y6toGFxtvvRxoNvCRdR_VjeFBk8j-9m41ClRrBZUZBqfWFcY9XIbPFj2wmq3tuZlZECSzjumY4CH9jDtL8rDDTtPNu1hQSZOUsyZe8xWZJwUVAUKrpNtggOLxz3gQxD5xTDpfD/s320/logooficial.png" alt="SPATIALMIND Logo" class="logo-img">
             </a>
-            <div class="menu-toggle" id="mobile-menu">
-                <i class="fa-solid fa-bars"></i>
+
+            <!-- Derecha: Logo GEONORTH + Nav links + Menú móvil -->
+            <div class="nav-right">
+                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiQXCA3ZDW0bQrgKNtU8bR5FYE2CcJkFDUdKvl3cLnUq7tNJ5zSTbXXENCkF8RsjxEmJySQV_AeH0m9EjDVKvETFZnoDsvaNoBCzkubUzPkxguJ9tnp6TBIyHT8i6eDcFoINClVA7H5jk9IolilukfYqGt8gPZGEKN2UDHC2dfKvkeNspJCkkX3jeXBID7h/s1022/ChatGPT%20Image%2024%20ene%202026,%2009_40_57%20a.m..png" alt="GEONORTH" class="geonorth-logo">
+                <div class="nav-divider"></div>
+                <nav class="nav-links">
+                    <a href="#services">Servicios</a>
+                    <a href="#focus">Tecnología</a>
+                    <a href="#case-study">Casos de Estudio</a>
+                    <a href="#results">Resultados</a>
+                    <a href="#" onclick="openModal()">Contacto</a>
+                </nav>
+                <div class="menu-toggle" id="mobile-menu">
+                    <i class="fa-solid fa-bars"></i>
+                </div>
             </div>
-            <nav class="nav-links">
-                <a href="#services">Servicios</a>
-                <a href="#focus">Tecnología</a>
-                <a href="#case-study">Casos de Estudio</a>
-                <a href="#results">Resultados</a>
-                <a href="#" class="cta-nav" onclick="openModal()">Contacto</a>
-            </nav>
         </div>
     </header>
 
@@ -898,8 +802,15 @@
         <div class="hero-bg"></div>
         <canvas id="hero-canvas"></canvas>
         <div class="hero-content">
-            <h1>Servicios – Exploración Minera | <span>GEONORTH</span></h1>
-            <p>Teledetección, SIG e Inteligencia Artificial para reducir el riesgo exploratorio y optimizar decisiones estratégicas.</p>
+            <div class="hero-brand">
+                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjg8y42kKvTytWPgixigZ4yUHnN2kUPW8vsoeAyvnz5UH3FO86vgH5Qx2Y6toGFxtvvRxoNvCRdR_VjeFBk8j-9m41ClRrBZUZBqfWFcY9XIbPFj2wmq3tuZlZECSzjumY4CH9jDtL8rDDTtPNu1hQSZOUsyZe8xWZJwUVAUKrpNtggOLxz3gQxD5xTDpfD/s320/logooficial.png" alt="SPATIALMIND">
+                <span>Grupo GEONORTH</span>
+            </div>
+            <h1>
+                <span class="brand-name">Spatialmind Soluciones Geoespaciales S.R.L.</span>
+                Exploración Minera con <span>Inteligencia Geoespacial</span>
+            </h1>
+            <p>Teledetección satelital, Sistemas de Información Geográfica e Inteligencia Artificial para reducir el riesgo exploratorio y optimizar decisiones estratégicas.</p>
             <button class="btn" onclick="openModal()">Solicitar Información</button>
         </div>
     </section>
@@ -914,7 +825,6 @@
                     Nuestro enfoque combina tecnología satelital de vanguardia, Sistemas de Información Geográfica (SIG) e Inteligencia Artificial, con el objetivo de reducir la incertidumbre y optimizar la toma de decisiones en la exploración de depósitos minerales.
                 </p>
             </div>
-
             <div class="tech-grid">
                 <div class="tech-item reveal">
                     <i class="fa-solid fa-satellite tech-icon"></i>
@@ -942,9 +852,7 @@
                 <h2>Servicios Principales</h2>
                 <div class="line"></div>
             </div>
-
             <div class="services-grid">
-                <!-- Servicio 1 -->
                 <article class="service-card reveal">
                     <div class="card-img-wrapper">
                         <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1000&auto=format&fit=crop" alt="Teledetección Multiespectral">
@@ -967,7 +875,6 @@
                     </div>
                 </article>
 
-                <!-- Servicio 2 -->
                 <article class="service-card reveal">
                     <div class="card-img-wrapper">
                         <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=1000&auto=format&fit=crop" alt="Mapeo de Alteraciones">
@@ -990,7 +897,6 @@
                     </div>
                 </article>
 
-                <!-- Servicio 3 -->
                 <article class="service-card reveal">
                     <div class="card-img-wrapper">
                         <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?q=80&w=1000&auto=format&fit=crop" alt="Geología Estructural IA">
@@ -1016,20 +922,17 @@
         </div>
     </section>
 
-    <!-- CASOS DE ESTUDIO ACTUALIZADOS -->
+    <!-- CASOS DE ESTUDIO -->
     <section class="section-padding case-study" id="case-study">
         <div class="container">
             <div class="section-header reveal">
                 <h2>Casos de Estudio: Exploración Minera Integral y GeoAI</h2>
                 <div class="line"></div>
                 <p class="intro-text">
-                    En GeoNorth, aplicamos un flujo de trabajo híbrido que combina la potencia del análisis geoespacial remoto con la precisión del trabajo geológico de campo. Estos proyectos demuestran nuestra capacidad para optimizar la prospección minera en la región andina.
+                    En Spatialmind, aplicamos un flujo de trabajo híbrido que combina la potencia del análisis geoespacial remoto con la precisión del trabajo geológico de campo. Estos proyectos demuestran nuestra capacidad para optimizar la prospección minera en la región andina.
                 </p>
             </div>
-
             <div class="case-container">
-                
-                <!-- CASO 1: IRUPANA -->
                 <article class="case-block reveal">
                     <div class="case-visual">
                         <div class="case-overlay-num">01</div>
@@ -1040,7 +943,6 @@
                         <h3>Sector Sur de Irupana</h3>
                         <span class="case-location"><i class="fa-solid fa-location-dot"></i> La Paz, Bolivia</span>
                         <p style="color:var(--text-muted); margin-bottom:15px;">Realizamos un estudio integral de exploración minera combinando teledetección avanzada y algoritmos de Inteligencia Artificial para la identificación de depósitos auríferos y aluviales.</p>
-                        
                         <div class="case-grid-details">
                             <div class="detail-col">
                                 <h5><i class="fa-solid fa-microchip"></i> Tecnología Aplicada</h5>
@@ -1062,7 +964,6 @@
                     </div>
                 </article>
 
-                <!-- CASO 2: SANDIA -->
                 <article class="case-block reverse reveal">
                     <div class="case-visual">
                         <div class="case-overlay-num">02</div>
@@ -1073,7 +974,6 @@
                         <h3>Sandia, Puno</h3>
                         <span class="case-location"><i class="fa-solid fa-location-dot"></i> Puno, Perú</span>
                         <p style="color:var(--text-muted); margin-bottom:15px;">Lideramos la evaluación técnica en una de las zonas con mayor potencial minero del sur peruano, enfocándonos en la cuantificación de material y análisis de alteraciones.</p>
-                        
                         <div class="case-grid-details">
                             <div class="detail-col">
                                 <h5><i class="fa-solid fa-cubes-stacked"></i> Cuantificación de Recursos</h5>
@@ -1095,7 +995,6 @@
                     </div>
                 </article>
 
-                <!-- CASO 3: ORURO -->
                 <article class="case-block reveal">
                     <div class="case-visual">
                         <div class="case-overlay-num">03</div>
@@ -1106,7 +1005,6 @@
                         <h3>Centro Minero de Oruro</h3>
                         <span class="case-location"><i class="fa-solid fa-location-dot"></i> Oruro, Bolivia</span>
                         <p style="color:var(--text-muted); margin-bottom:15px;">En el corazón minero de Bolivia, aplicamos nuestra metodología para la revalorización y optimización de áreas con actividad minera preexistente.</p>
-                        
                         <div class="case-grid-details">
                             <div class="detail-col">
                                 <h5><i class="fa-solid fa-magnifying-glass-chart"></i> Diagnóstico Estructural</h5>
@@ -1119,13 +1017,12 @@
                         </div>
                     </div>
                 </article>
-
             </div>
         </div>
     </section>
 
     <!-- ENTREGABLES -->
-    <section class="section-padding deliverables">
+    <section class="section-padding deliverables" id="deliverables">
         <div class="container">
             <div class="deliverables-container">
                 <div class="deliverables-list reveal">
@@ -1151,13 +1048,30 @@
                             <p>Asesoría para la siguiente fase de exploración en terreno.</p>
                         </div>
                     </div>
-                    <button class="btn" style="margin-top: 20px;" onclick="openModal()">Solicitar Ejemplo</button>
+                    <div class="examples-links">
+                        <a href="https://eddycc66.github.io/SPATIALMIND_SATELITAL_v90/" target="_blank" rel="noopener noreferrer" class="example-link-card">
+                            <div class="ex-icon"><i class="fa-solid fa-satellite"></i></div>
+                            <div class="ex-text">
+                                <h5>Informe Satelital Interactivo</h5>
+                                <p>Ejemplo real de entregable — Visualización geoespacial</p>
+                            </div>
+                            <i class="fa-solid fa-arrow-right ex-arrow"></i>
+                        </a>
+                        <a href="https://eddycc66.github.io/grafico4/" target="_blank" rel="noopener noreferrer" class="example-link-card">
+                            <div class="ex-icon"><i class="fa-solid fa-chart-area"></i></div>
+                            <div class="ex-text">
+                                <h5>Análisis Gráfico de Datos</h5>
+                                <p>Ejemplo real de entregable — Dashboard de resultados</p>
+                            </div>
+                            <i class="fa-solid fa-arrow-right ex-arrow"></i>
+                        </a>
+                    </div>
                 </div>
                 <div class="deliverables-visual reveal">
                     <div class="mockup">
                         <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1000&auto=format&fit=crop" alt="Mockup Informe Técnico" class="mockup-img">
                         <div style="margin-top:15px; display:flex; justify-content:space-between; color:#6b7280; font-size:0.8rem;">
-                            <span>GEONORTH_REPORT_V2.pdf</span>
+                            <span>SPATIALMIND_REPORT_V2.pdf</span>
                             <span>CONFIDENTIAL</span>
                         </div>
                     </div>
@@ -1185,16 +1099,17 @@
             <div class="footer-grid">
                 <div class="footer-brand">
                     <a href="#" class="logo">
-                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiQXCA3ZDW0bQrgKNtU8bR5FYE2CcJkFDUdKvl3cLnUq7tNJ5zSTbXXENCkF8RsjxEmJySQV_AeH0m9EjDVKvETFZnoDsvaNoBCzkubUzPkxguJ9tnp6TBIyHT8i6eDcFoINClVA7H5jk9IolilukfYqGt8gPZGEKN2UDHC2dfKvkeNspJCkkX3jeXBID7h/s1022/ChatGPT%20Image%2024%20ene%202026,%2009_40_57%20a.m..png" alt="GEONORTH Logo" class="logo-img">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjg8y42kKvTytWPgixigZ4yUHnN2kUPW8vsoeAyvnz5UH3FO86vgH5Qx2Y6toGFxtvvRxoNvCRdR_VjeFBk8j-9m41ClRrBZUZBqfWFcY9XIbPFj2wmq3tuZlZECSzjumY4CH9jDtL8rDDTtPNu1hQSZOUsyZe8xWZJwUVAUKrpNtggOLxz3gQxD5xTDpfD/s320/logooficial.png" alt="SPATIALMIND Logo" class="logo-img">
                     </a>
                     <p>Líderes en exploración minera digital, combinando ciencia geológica con el poder de los datos espaciales y la inteligencia artificial.</p>
+                    <span class="group-mention"><i class="fa-solid fa-gem" style="margin-right:6px;"></i> Parte del Grupo GEONORTH</span>
                 </div>
 
                 <div class="footer-contact">
                     <h4>Contacto Directo</h4>
                     <div class="ceo-card">
                         <h5>M.Sc. Edwin Calle Condori</h5>
-                        <span>CEO & Founder – GEONORTH</span>
+                        <span>CEO & Founder – SPATIALMIND</span>
                         <div style="margin-top:15px;" class="contact-item">
                             <i class="fa-brands fa-whatsapp"></i>
                             <a href="https://wa.me/59167345804">+591 67345804</a>
@@ -1208,13 +1123,14 @@
                         <li><a href="#services" style="color:var(--text-muted);"><i class="fa-solid fa-angle-right text-gold"></i> Servicios</a></li>
                         <li><a href="#case-study" style="color:var(--text-muted);"><i class="fa-solid fa-angle-right text-gold"></i> Casos de Estudio</a></li>
                         <li><a href="#results" style="color:var(--text-muted);"><i class="fa-solid fa-angle-right text-gold"></i> Resultados</a></li>
+                        <li><a href="https://eddycc66.github.io/SPATIALMIND_SATELITAL_v90/" target="_blank" rel="noopener noreferrer" style="color:var(--text-muted);"><i class="fa-solid fa-angle-right text-gold"></i> Ejemplo: Informe Satelital</a></li>
+                        <li><a href="https://eddycc66.github.io/grafico4/" target="_blank" rel="noopener noreferrer" style="color:var(--text-muted);"><i class="fa-solid fa-angle-right text-gold"></i> Ejemplo: Análisis Gráfico</a></li>
                         <li><a href="#" onclick="openModal()" style="color:var(--text-muted);"><i class="fa-solid fa-angle-right text-gold"></i> Solicitar Cotización</a></li>
                     </ul>
                 </div>
             </div>
-
             <div class="footer-bottom">
-                <p>&copy; 2023 GEONORTH. Todos los derechos reservados. Especialistas en Geociencias.</p>
+                <p class="brand-line">&copy; 2025 <strong>SPATIALMIND Soluciones Geoespaciales S.R.L.</strong> — Todos los derechos reservados. Especialistas en Geociencias.</p>
             </div>
         </div>
     </footer>
@@ -1225,8 +1141,6 @@
             <button class="close-modal" onclick="closeModal()">&times;</button>
             <h3 class="text-gold mb-4">Solicitar Información</h3>
             <p class="mb-4" style="font-size:0.9rem; color:var(--text-muted);">Complete el formulario y nuestro equipo técnico se pondrá en contacto con usted.</p>
-            
-            <!-- FORMULARIO CONFIGURADO CON TU LINK DE FORMSPREE -->
             <form id="contactForm" action="https://formspree.io/f/xpqprpqy" method="POST" onsubmit="handleForm(event)">
                 <div class="form-group">
                     <label>Nombre Completo</label>
@@ -1247,7 +1161,6 @@
 
     <!-- JAVASCRIPT -->
     <script>
-        // 1. Mobile Menu Toggle
         const mobileMenuBtn = document.getElementById('mobile-menu');
         const navLinks = document.querySelector('.nav-links');
 
@@ -1263,7 +1176,6 @@
             }
         });
 
-        // Cerrar menú al hacer click en un enlace
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', () => {
                 navLinks.classList.remove('active');
@@ -1272,9 +1184,7 @@
             });
         });
 
-        // 2. Scroll Reveal Animation (Intersection Observer)
         const revealElements = document.querySelectorAll('.reveal');
-
         const revealObserver = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -1282,138 +1192,78 @@
                     observer.unobserve(entry.target);
                 }
             });
-        }, {
-            root: null,
-            threshold: 0.15
-        });
-
+        }, { root: null, threshold: 0.15 });
         revealElements.forEach(el => revealObserver.observe(el));
 
-        // 3. Modal Logic
         const modal = document.getElementById('contactModal');
+        function openModal() { modal.classList.add('active'); document.body.style.overflow = 'hidden'; }
+        function closeModal() { modal.classList.remove('active'); document.body.style.overflow = 'auto'; }
+        modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
 
-        function openModal() {
-            modal.classList.add('active');
-            document.body.style.overflow = 'hidden'; 
-        }
-
-        function closeModal() {
-            modal.classList.remove('active');
-            document.body.style.overflow = 'auto'; 
-        }
-
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) closeModal();
-        });
-
-        // 4. Toggle Details (Accordion) for Services
         function toggleDetails(btn) {
-            const cardContent = btn.parentElement;
-            const panel = cardContent.querySelector('.details-panel');
-            const icon = btn.querySelector('i');
-            const textSpan = btn.childNodes[0]; // El texto "Leer más"
-
-            // Toggle clase activa en el botón (para rotar icono)
+            const panel = btn.parentElement.querySelector('.details-panel');
+            const textSpan = btn.childNodes[0];
             btn.classList.toggle('active');
-
             if (panel.style.maxHeight) {
-                // Cerrar
                 panel.style.maxHeight = null;
-                // Actualizar texto
                 textSpan.textContent = "Leer más ";
             } else {
-                // Abrir - necesitamos altura exacta para animación
                 panel.style.maxHeight = panel.scrollHeight + "px";
-                // Actualizar texto
                 textSpan.textContent = "Leer menos ";
             }
         }
 
-        // 5. REAL FORM SUBMISSION (AJAX)
-        // Esta función envía los datos a tu link de Formspree sin recargar la página
         async function handleForm(e) {
-            e.preventDefault(); // Evita que la página se recargue
-            
+            e.preventDefault();
             const form = e.target;
             const btn = form.querySelector('button[type="submit"]');
             const originalText = btn.innerText;
-            
-            // Estado de "Enviando..."
             btn.innerText = "Enviando...";
             btn.style.opacity = "0.7";
             btn.disabled = true;
-
             const data = new FormData(form);
-
             try {
-                // Enviamos los datos usando Fetch API
                 const response = await fetch(form.action, {
                     method: form.method,
                     body: data,
-                    headers: {
-                        'Accept': 'application/json'
-                    }
+                    headers: { 'Accept': 'application/json' }
                 });
-
                 if (response.ok) {
-                    // Éxito
                     btn.innerText = "¡Mensaje Enviado!";
                     btn.style.background = "var(--accent-green)";
                     btn.style.borderColor = "var(--accent-green)";
                     btn.style.color = "white";
-                    
-                    // Cerrar modal y limpiar después de 2 segundos
                     setTimeout(() => {
-                        closeModal();
-                        form.reset();
-                        // Restaurar botón
+                        closeModal(); form.reset();
                         btn.innerText = originalText;
                         btn.style.background = "transparent";
                         btn.style.borderColor = "var(--primary-gold)";
                         btn.style.color = "var(--primary-gold)";
-                        btn.style.opacity = "1";
-                        btn.disabled = false;
+                        btn.style.opacity = "1"; btn.disabled = false;
                     }, 2000);
                 } else {
-                    // Error del servidor
                     btn.innerText = "Error al enviar";
-                    btn.style.background = "#ef4444";
-                    btn.style.color = "white";
-                    
+                    btn.style.background = "#ef4444"; btn.style.color = "white";
                     setTimeout(() => {
                         btn.innerText = originalText;
                         btn.style.background = "transparent";
                         btn.style.color = "var(--primary-gold)";
-                        btn.style.opacity = "1";
-                        btn.disabled = false;
+                        btn.style.opacity = "1"; btn.disabled = false;
                     }, 2000);
                 }
             } catch (error) {
-                // Error de conexión
                 btn.innerText = "Error de conexión";
-                console.error('Error:', error);
-                
-                setTimeout(() => {
-                    btn.innerText = originalText;
-                    btn.style.opacity = "1";
-                    btn.disabled = false;
-                }, 2000);
+                setTimeout(() => { btn.innerText = originalText; btn.style.opacity = "1"; btn.disabled = false; }, 2000);
             }
         }
 
-        // 6. Particle Animation for Hero (Canvas)
+        // Particles
         const canvas = document.getElementById('hero-canvas');
         const ctx = canvas.getContext('2d');
         let particlesArray;
-
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
-
-        window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            initParticles();
-        });
+        window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; initParticles(); });
 
         class Particle {
             constructor() {
@@ -1424,18 +1274,11 @@
                 this.size = Math.random() * 2;
                 this.color = '#3b82f6';
             }
-            draw() {
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
-                ctx.fillStyle = this.color;
-                ctx.fill();
-            }
+            draw() { ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false); ctx.fillStyle = this.color; ctx.fill(); }
             update() {
                 if (this.x > canvas.width || this.x < 0) this.directionX = -this.directionX;
                 if (this.y > canvas.height || this.y < 0) this.directionY = -this.directionY;
-                this.x += this.directionX;
-                this.y += this.directionY;
-                this.draw();
+                this.x += this.directionX; this.y += this.directionY; this.draw();
             }
         }
 
@@ -1461,24 +1304,17 @@
         function initParticles() {
             particlesArray = [];
             let numberOfParticles = (canvas.height * canvas.width) / 9000;
-            for (let i = 0; i < numberOfParticles; i++) {
-                particlesArray.push(new Particle());
-            }
+            for (let i = 0; i < numberOfParticles; i++) particlesArray.push(new Particle());
         }
 
         function animateParticles() {
             requestAnimationFrame(animateParticles);
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            for (let i = 0; i < particlesArray.length; i++) {
-                particlesArray[i].update();
-            }
+            for (let i = 0; i < particlesArray.length; i++) particlesArray[i].update();
             connect();
         }
-
         initParticles();
         animateParticles();
-
     </script>
 </body>
-
 </html>
